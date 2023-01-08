@@ -3,7 +3,7 @@ import axios from "axios";
 import styles from "../styles/Home.module.css";
 import {useRouter} from "next/router";
 
-const url = "http://localhost:3000/api/task";
+const url = `${process.env.NEXT_PUBLIC_HOST}/api/task`;
 
 export default function Home(props) {
 	const router=useRouter();
@@ -15,7 +15,7 @@ export default function Home(props) {
 	useEffect(() => {
 	  var logged=window.localStorage.getItem("IsLoggedIn");
 	  if(logged==false){
-		router.redirect('http://localhost:3000/Signup')
+		router.redirect(`${process.env.NEXT_PUBLIC_HOST}/Signup`)
 	}
 	}, [])
 

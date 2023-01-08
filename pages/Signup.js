@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
+import styles from "../styles/Home.module.css";
 import { useRouter } from 'next/router'
 const Signup = () => {
     const router=useRouter();
-    const [name, setname] = useState();
-    const [email, setemail] = useState()
-    const [password, setpassword] = useState()
+    const [name, setname] = useState('');
+    const [email, setemail] = useState('')
+    const [password, setpassword] = useState('')
     const changehandler=(e)=>{
         if(e.target.name=="name"){
             setname(e.target.value);
@@ -21,7 +22,7 @@ const Signup = () => {
 
        const data = { name, email, password };
 
-let res= await fetch('http://localhost:3000/api/signup', {
+let res= await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signup`, {
   method: 'POST', // or 'PUT'
   headers: {
     'Content-Type': 'application/json',
@@ -35,7 +36,7 @@ let res= await fetch('http://localhost:3000/api/signup', {
  setpassword('');
 if (response.success){
     alert("successfully account created")
-    router.push('http://localhost:3000/Login')
+    router.push(`${process.env.NEXT_PUBLIC_HOST}/Login`)
 }
     }
   return (
@@ -44,7 +45,7 @@ if (response.success){
         
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
     <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg md:w-1/3 lg:w-1/3 sm:w-1/3">
-        
+    <h1 className={styles.heading}>Welcome! SignUp to</h1>
         <form onSubmit={handlesubmit} action="" method='POST'>
             <div className="mt-4">
                 <div>

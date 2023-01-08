@@ -1,9 +1,10 @@
 import React,{useState} from 'react'
+import styles from "../styles/Home.module.css";
 import { useRouter } from 'next/router'
 const Login = () => {
     const router=useRouter();
-    const [email, setemail] = useState()
-    const [password, setpassword] = useState()
+    const [email, setemail] = useState('')
+    const [password, setpassword] = useState('')
     const changehandler=(e)=>{
       
         if(e.target.name=="email"){
@@ -18,7 +19,7 @@ const Login = () => {
 
        const data = {  email, password };
 
-let res= await fetch('http://localhost:3000/api/login', {
+let res= await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/login`, {
   method: 'POST', // or 'PUT'
   headers: {
     'Content-Type': 'application/json',
@@ -33,13 +34,13 @@ let res= await fetch('http://localhost:3000/api/login', {
 if(response.success){
     window.localStorage.setItem("IsLoggedIn", true);
     alert("successfully logged in")
-    router.push('http://localhost:3000')
+    router.push(`${process.env.NEXT_PUBLIC_HOST}`)
 }
     }
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
     <div className="px-8 py-6 mx-4 mt-4 text-left bg-white shadow-lg md:w-1/3 lg:w-1/3 sm:w-1/3">
-        
+    <h1 className={styles.heading}>Welcome! SignIn to</h1>
         <form onSubmit={handlesubmit} action="" method="POST">
             <div className="mt-4">
                 
